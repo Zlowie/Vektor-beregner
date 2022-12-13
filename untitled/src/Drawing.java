@@ -13,27 +13,28 @@ public class Drawing extends Canvas {
     int XLength = 0;
     int Scale = 5;
 
-    public void paint(Graphics g){
+    public void paint(Graphics g){ //køre når tegningen er åben
         Graphics2D g2 = (Graphics2D) g;
 
-        g.drawLine(XStart,0,XStart,Main.CanvasH);
-        g.drawLine(0,YStart,Main.CanvasW,YStart);
+
+
+        g2.drawLine(XStart,0,XStart,Main.CanvasH);
+        g2.drawLine(0,YStart,Main.CanvasW,YStart);
 
 
 
 
         for (int i = 0; vectorList.size() > i ; i++){
 
-            System.out.println("element: " + vectorList.get(i));
-            System.out.println("int: " + i);
             int XVecStart = Math.round(vectorList.get(i).getVectorStartX());
             int YVecStart = Math.round(vectorList.get(i).getVectorStartY());
             int XVecLength = Math.round(vectorList.get(i).getVectorX());
             int YVecLength = Math.round(vectorList.get(i).getVectorY());
 
 
+            g2.setColor(Color.RED);
 
-            g.drawLine(XVecStart+XStart,YVecStart+YStart,XVecLength + XStart + XVecStart,YVecLength + YStart + YVecStart);
+            g2.drawLine(XVecStart+XStart,YVecStart+YStart,XVecLength + XStart + XVecStart,YVecLength + YStart + YVecStart);
         };
 
 
@@ -46,23 +47,20 @@ public class Drawing extends Canvas {
         //add new vector everytime
         VectorClass tempVector = new VectorClass();
 
-        System.out.println("input " + vector);
         tempVector.setVectorStartY(vector.getVectorStartY()*-Scale); //use new vector instead of this.vector
         tempVector.setVectorStartX(vector.getVectorStartX()*Scale);
         tempVector.setVectorY(vector.getVectorY()*-Scale);
         tempVector.setVectorX(vector.getVectorX()*Scale);
         tempVector.setName(vector.getName());
-        System.out.println("output " + tempVector);
 
         vectorList.add(tempVector);
-        System.out.println(vectorList.size());
+
     }
 
     public void addVectorList(ArrayList<VectorClass> vectorList){
         vectorList.forEach((element) -> {
-            System.out.println(element);
+            //System.out.println(element);
             addVector(element);
-            System.out.println(element);
         });
     }
 }

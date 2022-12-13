@@ -50,6 +50,30 @@ public class VectorClass {
         return result;
     }
 
+    public VectorClass sub(VectorClass Vector) {
+        VectorClass result  = new VectorClass();
+
+        result.vectorX = this.vectorX - Vector.vectorX;
+        result.vectorY = this.vectorY - Vector.vectorY;
+        result.name = this.name + " - " + Vector.name;
+        result.vectorStartX = this.vectorStartX;
+        result.vectorStartY = this.vectorStartY;
+
+        return result;
+    }
+
+    public VectorClass move(int x, int y) {
+        VectorClass result  = new VectorClass();
+
+        result.vectorX = this.vectorX;
+        result.vectorY = this.vectorY;
+        result.name = "moved " + this.name ;
+        result.vectorStartX = this.vectorStartX + x;
+        result.vectorStartY = this.vectorStartY + y;
+
+        return result;
+    }
+
     public String toString(){
 
         String finalString = this.name + ": (" + this.vectorX + "," + this.vectorY + "), (" + this.vectorStartX + "," + this.vectorStartY + ")";
