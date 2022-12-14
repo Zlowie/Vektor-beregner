@@ -74,6 +74,54 @@ public class VectorClass {
         return result;
     }
 
+public VectorClass scale(float scale) {
+        VectorClass result  = new VectorClass();
+
+        result.vectorX = this.vectorX * scale;
+        result.vectorY = this.vectorY * scale;
+        result.name = this.name + " * " + scale;
+        result.vectorStartX = this.vectorStartX;
+        result.vectorStartY = this.vectorStartY;
+
+        return result;
+    }
+
+    public VectorClass rotate(float angle) {
+        VectorClass result  = new VectorClass();
+
+        result.vectorX = (float) (this.vectorX * Math.cos(angle) - this.vectorY * Math.sin(angle));
+        result.vectorY = (float) (this.vectorX * Math.sin(angle) + this.vectorY * Math.cos(angle));
+        result.name = this.name + " roterede " + angle + " grader";
+        result.vectorStartX = this.vectorStartX;
+        result.vectorStartY = this.vectorStartY;
+
+        return result;
+    }
+
+    public VectorClass dotProdukt(VectorClass Vector) {
+        VectorClass result  = new VectorClass();
+
+        result.vectorX = this.vectorX * Vector.vectorX;
+        result.vectorY = this.vectorY * Vector.vectorY;
+        result.name = this.name + " * " + Vector.name;
+        result.vectorStartX = this.vectorStartX;
+        result.vectorStartY = this.vectorStartY;
+
+        return result;
+    }
+
+    public VectorClass crossProdukt(VectorClass Vector) {
+        VectorClass result  = new VectorClass();
+
+        result.vectorX = this.vectorY * Vector.vectorX;
+        result.vectorY = this.vectorX * Vector.vectorY;
+        result.name = this.name + " x " + Vector.name;
+        result.vectorStartX = this.vectorStartX;
+        result.vectorStartY = this.vectorStartY;
+
+        return result;
+    }
+
     public String toString(){
 
         String finalString = this.name + ": (" + this.vectorX + "," + this.vectorY + "), (" + this.vectorStartX + "," + this.vectorStartY + ")";
