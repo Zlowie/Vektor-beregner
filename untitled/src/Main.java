@@ -23,19 +23,27 @@ public class Main {
 
         int operation;
 
-        System.out.println("1. Tegn 1 vektor");
+        System.out.println("1. Lav 1 vektor");
         System.out.println("2. Pluse 2 vektorer");
         System.out.println("3. Minuse 2 vektorer");
-        System.out.println("4. Finde prikprodukt");
-        System.out.println("5. Finde krydsprodukt");
+        System.out.println("4. Find prikprodukt");
+        System.out.println("5. Find Areal");
         System.out.println("6. Flyt vektor");
         System.out.println("7. Roter vektor");
         System.out.println("8. Skaler vektor");
         System.out.println("9. Tegn vektorer");
+        System.out.println("10. Fjern vektor");
         System.out.println("0. Exit");
 
-        operation = sc.nextInt();
-        sc.nextLine();
+        try {
+            operation = sc.nextInt();
+            sc.nextLine();
+        } catch (Exception e) {
+            System.out.println("Du skal indtaste et tal fra 0-10");
+            sc.nextLine();
+            menu();
+            return;
+        }
 
        switch (operation) {
            case 1:
@@ -76,23 +84,25 @@ public class Main {
            case 4:
                 VectorClass vector6 = ChooseVector(1);
                 VectorClass vector7 = ChooseVector(2);
-                VectorClass result4 = vector6.dotProdukt(vector7);
+                float result4 = vector6.dotProdukt(vector7);
 
-                vectorList.add(result4);
-                System.out.println(vector6 + " * " + vector7 + " = " + result4);
+                //vectorList.add(result4);
+                System.out.println(vector6 + " Dot " + vector7 + " = " + result4);
+
+                menu();
 
                 break;
            case 5:
-               System.out.println("hvilket vektorer vil du finde krydsproduktet af?");
+               System.out.println("hvilket vektorer vil du finde arealet af?");
 
                VectorClass vector4 = ChooseVector(1);
 
                VectorClass vector5 = ChooseVector(2);
 
-               VectorClass result3 = vector4.crossProdukt(vector5);
-               vectorList.add(result3);
+               float result3 = vector4.crossProdukt(vector5);
+               //vectorList.add(result3);
 
-               System.out.println("Krydsproduktet af " + vector4 + " og " + vector5 + " er: " + result3);
+               System.out.println("alrealet af " + vector4 + " og " + vector5 + " er: " + result3);
 
                menu();
                 break;
@@ -118,16 +128,16 @@ public class Main {
                 VectorClass vector2 = ChooseVector(1);
 
                 System.out.println("hvor mange grader vil du rotere den?");
-                int rotation = sc.nextInt();
+                double rotation =(sc.nextInt() * Math.PI / 180);
                 sc.nextLine();
 
                 vectorList.add(vector2.rotate(rotation));
-                System.out.println(vector2 + " roteret " + rotation + " grader er: " + vector2.rotate(rotation));
+                System.out.println(vector2.rotate(rotation));
 
                 menu();
 
                 break;
-              case 8:
+           case 8:
                 System.out.println("hvilken vektor vil du skaler?");
 
                 VectorClass vector1 = ChooseVector(1);
@@ -141,10 +151,18 @@ public class Main {
 
                 menu();
                   break;
-                case 9:
+           case 9:
                     DrawResult();
                     menu();
 
+                    break;
+              case 10:
+                    System.out.println("hvilken vektor vil du fjerne?");
+                    VectorClass vector = ChooseVector(1);
+
+                    vectorList.remove(vector);
+
+                    menu();
                     break;
            case 0:
                System.exit(1);
@@ -157,42 +175,53 @@ public class Main {
     static VectorClass askVector(int nr){
         System.out.println("indtast " + nr + ". Vektors navn");
         String name = sc.nextLine();
-        System.out.println("indtast " + name + "'s længde på x-aksen");
-        float vec1x = sc.nextFloat();
-        System.out.println("indtast " + name + "'s længde på y-aksen");
-        float vec1y = sc.nextFloat();
-        System.out.println("indtast " + name + "'s start på x-aksen");
-        float vecxStart= sc.nextFloat();
-        System.out.println("indtast " + name + "'s start på y-aksen");
-        float vecyStart = sc.nextFloat();
-        sc.nextLine();
 
-        VectorClass vector = new VectorClass();
+        try {
+            System.out.println("indtast " + name + "'s længde på x-aksen");
+            float vec1x = sc.nextFloat();
+            System.out.println("indtast " + name + "'s længde på y-aksen");
+            float vec1y = sc.nextFloat();
+            System.out.println("indtast " + name + "'s start på x-aksen");
+            float vecxStart = sc.nextFloat();
+            System.out.println("indtast " + name + "'s start på y-aksen");
+            float vecyStart = sc.nextFloat();
+            sc.nextLine();
 
-        vector.setName(name);
-        vector.setVectorX(vec1x);
-        vector.setVectorY(vec1y);
-        vector.setVectorStartX(vecxStart);
-        vector.setVectorStartY(vecyStart);
+            VectorClass vector = new VectorClass();
 
-        return vector;
+            vector.setName(name);
+            vector.setVectorX(vec1x);
+            vector.setVectorY(vec1y);
+            vector.setVectorStartX(vecxStart);
+            vector.setVectorStartY(vecyStart);
 
+            return vector;
+        }catch (Exception e){
+            sc.nextLine();
+
+            askVector(nr);
+            System.out.println("Du skal indtaste tal");
+        }
+
+        return null;
     }
 
     static VectorClass ChooseVector(int nr) {
 
         try{
             for (int i = 0; i < vectorList.size(); i++) {
-                System.out.println(i + ". " + vectorList.get(i).getName());
+                System.out.println(i + 1 + ". " + vectorList.get(i).getName());
             }
 
             int vectorNr = sc.nextInt();
             sc.nextLine();
 
-            VectorClass vector = vectorList.get(vectorNr);
+            VectorClass vector = vectorList.get(vectorNr - 1);
 
             return vector;
         } catch (Exception e) {
+            sc.nextLine();
+
             System.out.println("Der er ikke nogen vektorer med det nummer");
             menu();
         }
