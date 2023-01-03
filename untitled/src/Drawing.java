@@ -17,7 +17,13 @@ public class Drawing extends Canvas {
         Graphics2D g2 = (Graphics2D) g;
 
 
+        g2.setColor(Color.LIGHT_GRAY);
+        for(int i = 0; i*Scale*2 < Main.CanvasW; i++){
+            g2.drawLine(i*Scale*2, 0, i*Scale*2, Main.CanvasH);
+            g2.drawLine(0, i*Scale*2, Main.CanvasW, i*Scale*2);
+        }
 
+        g2.setColor(Color.BLACK);
         g2.drawLine(XStart,0,XStart,Main.CanvasH);
         g2.drawLine(0,YStart,Main.CanvasW,YStart);
 

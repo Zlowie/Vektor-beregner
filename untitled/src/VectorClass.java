@@ -3,7 +3,6 @@ public class VectorClass {
     private float vectorY = 0;
     private float vectorStartX = 0;
     private float vectorStartY = 0;
-
     private String name;
 
     public void setName(String name) {
@@ -102,6 +101,7 @@ public VectorClass scale(float scale) {
         float result;
 
         result = this.vectorX * Vector.vectorX + this.vectorY * Vector.vectorY;
+
 
         return result;
     }
