@@ -1,7 +1,9 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Scanner;
+
 
 public class Main {
     static Scanner sc = new Scanner(System.in);
@@ -47,6 +49,7 @@ public class Main {
 
        switch (operation) {
            case 1:
+
                VectorClass Vector = askVector(1);
                vectorList.add(Vector);
 
@@ -56,12 +59,13 @@ public class Main {
 
                break;
            case 2:
+               System.out.println("hvilken vektorer vil du pluse?" );
                VectorClass vector10 = ChooseVector(1);
 
                VectorClass vector11 = ChooseVector(2);
 
 
-               VectorClass result = vector10.sub(vector11);
+               VectorClass result = vector10.add(vector11);
                vectorList.add(result);
 
                System.out.println(vector10 + " + " + vector11 + " = " + result);
@@ -69,12 +73,15 @@ public class Main {
                menu();
                break;
            case 3:
+
+               System.out.println("hvilken vektor vil du minuse?" );
                VectorClass vector8 = ChooseVector(1);
 
+               System.out.println("hvilken vektor vil du trække fra?" );
                VectorClass vector9 = ChooseVector(2);
 
 
-               VectorClass result2 = vector8.add(vector9);
+               VectorClass result2 = vector8.sub(vector9);
                vectorList.add(result2);
 
                System.out.println(vector8 + " - " + vector9 + " = " + result2);
@@ -82,6 +89,8 @@ public class Main {
                menu();
                 break;
            case 4:
+
+                System.out.println("hvilken vektorer vil du finde prikproduktet af?" );
                 VectorClass vector6 = ChooseVector(1);
                 VectorClass vector7 = ChooseVector(2);
                 float result4 = vector6.dotProdukt(vector7);
@@ -246,13 +255,19 @@ public class Main {
         sc.nextLine();
 
         switch (operation) {
-            case 1:
+            case 1: //tegner alle vektorer
+                tegneVectorList.clear();
+                //tegneVectorList = vectorList;
 
-                tegneVectorList = vectorList;
+                for (int i = 0; i < vectorList.size(); i++) {
+                    tegneVectorList.add(vectorList.get(i));
+                }
+
                 canvas.addVectorList(tegneVectorList);
                 break;
-            case 2:
+            case 2://tegner en specefik vektor
                 System.out.println("hvilken vektor vil du tegne?");
+                tegneVectorList.clear();
 
                 for(int i = 0; i < vectorList.size(); i++) {
                     System.out.print(i+1 + ". " + vectorList.get(i) + "\n");
@@ -265,8 +280,9 @@ public class Main {
                         tegneVectorList.add(vectorList.get(vektorNummer - 1));
                         canvas.addVectorList(tegneVectorList);
                 break;
-            case 3:
+            case 3://tegner et givet mængde vektorer
                 System.out.println("Hvor mange vektorer vil du tegne?");
+                tegneVectorList.clear();
 
                 int antalVektorer;
                 antalVektorer = sc.nextInt();

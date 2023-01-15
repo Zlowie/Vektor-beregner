@@ -41,6 +41,7 @@ public class Drawing extends Canvas {
             g2.setColor(Color.RED);
 
             g2.drawLine(XVecStart+XStart,YVecStart+YStart,XVecLength + XStart + XVecStart,YVecLength + YStart + YVecStart);
+
         };
 
 
@@ -63,7 +64,8 @@ public class Drawing extends Canvas {
 
     }
 
-    public void addVectorList(ArrayList<VectorClass> vectorList){
+
+    public void addVectorList(ArrayList<VectorClass> vectorList){ //skal være cleared
         vectorList.forEach((element) -> {
             //System.out.println(element);
             addVector(element);
